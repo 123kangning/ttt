@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log"
 	"qin/model"
+	"reflect"
 )
 
 func AddScene(sceneInfo *model.Scene) (err error) {
@@ -26,26 +27,29 @@ func AddImageToScene(url string, sid int) (err error) {
 	i.Url = url
 	return DB.Create(i).Error
 }
-func GetScene(sid int) (resp *model.GetSceneResponse, err error) {
-	s := model.Scene{}
-	DB.Where("id = ?", sid).Find(&s)
+func GetScene(name string) (resp *model.GetSceneResponse, err error) {
+	var s []*model.Scene
+	log.Println(name, " &s.type = ", reflect.TypeOf(&s))
+	DB.Where("name like ?", "%"+name+"%").Find(&s)
 	log.Println(s)
 	resp = &model.GetSceneResponse{}
-	if s.Id == 0 {
-		return resp, errors.New("没有该景区")
-	}
-	resp.Id = s.Id
-	resp.Name = s.Name
-	resp.Description = s.Description
-	resp.Urls, err = GetImages(sid)
-	if err != nil {
-		log.Println("GetImages err = ", err)
-		return resp, err
-	}
-	resp.Comments, err = GetComment(sid)
-	if err != nil {
-		log.Println("GetComment err = ", err)
-		return resp, err
+	resp.Scene = make([]*model.Scenes, 0)
+	for _, v := range s {
+		scenes := &model.Scenes{}
+		scenes.Id = v.Id
+		scenes.Name = v.Name
+		scenes.Description = v.Description
+		scenes.Urls, err = GetImages(v.Id)
+		if err != nil {
+			log.Println("GetImages err = ", err)
+			return resp, err
+		}
+		scenes.Comments, err = GetComment(v.Id)
+		if err != nil {
+			log.Println("GetComment err = ", err)
+			return resp, err
+		}
+		resp.Scene = append(resp.Scene, scenes)
 	}
 	return resp, nil
 }

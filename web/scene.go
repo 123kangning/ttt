@@ -50,9 +50,8 @@ func AddImageToScene(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 func GetScene(c *gin.Context) {
-	s := c.Query("Sid")
-	sid, _ := strconv.Atoi(s)
-	resp, err := service.GetScene(sid)
+	name := c.Query("Name")
+	resp, err := service.GetScene(name)
 	if err != nil {
 		resp.StatusCode = 1
 		resp.StatusMessage = err.Error()
@@ -66,6 +65,8 @@ func AddComments(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, "bind error")
 		return
 	}
+	u, _ := c.Get("username")
+	req.Username = u.(string)
 	err := service.AddComments(req)
 	resp := &model.BaseResp{}
 	if err != nil {

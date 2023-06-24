@@ -47,3 +47,24 @@ func Login(userInfo *model.User) (err error) {
 func SignOut(userInfo *model.User) (err error) {
 	return DB.Where("username = ?", userInfo.Username).Delete(&model.User{}).Error
 }
+func AddJourney(journey *model.Journey) (err error) {
+	j := model.Journey{}
+	DB.Where("username = ? and name = ?", journey.Username, journey.Name).Limit(1).Find(&j)
+	if j.Id > 0 {
+		return errors.New("添加失败，有相同规划存在")
+	}
+	return DB.Create(journey).Error
+}
+func GetJourneys(username string) (journeys []string, err error) {
+	var js []*model.Journey
+	err = DB.Where("username = ?", username).Find(&js).Error
+	journeys = make([]string, 0)
+	for _, v := range js {
+		journeys = append(journeys, v.Name)
+	}
+	return journeys, err
+}
+func GetJourney(username, name string) (journey *model.Journey, err error) {
+	err = DB.Where("username = ? and name = ?", username, name).Find(&journey).Error
+	return journey, err
+}

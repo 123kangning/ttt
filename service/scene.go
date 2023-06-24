@@ -32,8 +32,8 @@ func AddImageToScene(name string, file multipart.File, sid int) (err error) {
 	log.Println("url = ", url)
 	return dao.AddImageToScene(url, sid)
 }
-func GetScene(sid int) (resp *model.GetSceneResponse, err error) {
-	return dao.GetScene(sid)
+func GetScene(name string) (resp *model.GetSceneResponse, err error) {
+	return dao.GetScene(name)
 }
 func AddComments(comment *model.Comment) (err error) {
 	return dao.AddComments(comment)

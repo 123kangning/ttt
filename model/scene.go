@@ -1,24 +1,24 @@
 package model
 
 type Scene struct {
-	Id          int
-	Name        string
-	Description string
+	Id                int
+	Name, Description string
 }
 type Images struct {
 	Id  int
 	Sid int
 	Url string
 }
+type Scenes struct {
+	Scene
+	Urls     []string
+	Comments []*Comment
+}
 type GetSceneResponse struct {
 	BaseResp
-	Id          int
-	Name        string
-	Description string
-	Urls        []string
-	Comments    []*Comment
+	Scene []*Scenes
 }
 type Comment struct {
-	Id, Uid, Sid int
-	Content      string
+	Id, Sid           int
+	Username, Content string
 }

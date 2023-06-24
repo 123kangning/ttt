@@ -14,6 +14,14 @@ type UserLoginResponse struct {
 	Token string
 }
 type Journey struct {
-	Id, Uid       int
-	name, content string
+	Id                      int
+	Username, Name, Content string
+}
+type GetJourneys struct {
+	BaseResp
+	Journeys []string
+}
+type GetJourney struct {
+	BaseResp
+	Journey *Journey
 }

@@ -53,3 +53,43 @@ func SignOut(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, resp)
 }
+func AddJourney(c *gin.Context) {
+	req := &model.Journey{}
+	if err := c.Bind(req); err != nil {
+		log.Println("err = ", err, " req = ", req)
+		c.JSON(http.StatusBadRequest, "bind error")
+		return
+	}
+	err := service.AddJourney(req)
+	resp := &model.BaseResp{}
+	if err != nil {
+		resp.StatusCode = 1
+		resp.StatusMessage = err.Error()
+	}
+	c.JSON(http.StatusOK, resp)
+}
+func GetJourneys(c *gin.Context) {
+	u, _ := c.Get("username")
+	username := u.(string)
+	js, err := service.GetJourneys(username)
+	resp := &model.GetJourneys{}
+	if err != nil {
+		resp.StatusCode = 1
+		resp.StatusMessage = err.Error()
+	}
+	resp.Journeys = js
+	c.JSON(http.StatusOK, resp)
+}
+func GetJourney(c *gin.Context) {
+	u, _ := c.Get("username")
+	username := u.(string)
+	name := c.Query("Name")
+	js, err := service.GetJourney(username, name)
+	resp := &model.GetJourney{}
+	if err != nil {
+		resp.StatusCode = 1
+		resp.StatusMessage = err.Error()
+	}
+	resp.Journey = js
+	c.JSON(http.StatusOK, resp)
+}
