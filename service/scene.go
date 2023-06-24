@@ -7,17 +7,18 @@ import (
 	"log"
 	"mime/multipart"
 	"os"
+	"qin/configs/consts"
 	"qin/dao"
-	"qin/web"
+	"qin/model"
 	"strconv"
 )
 
-func AddScene(scene *web.Scene) (err error) {
+func AddScene(scene *model.Scene) (err error) {
 	return dao.AddScene(scene)
 }
 func AddImageToScene(name string, file multipart.File, sid int) (err error) {
-	url := "./public/" + strconv.Itoa(sid) + "_" + name
-	f, err := os.OpenFile(url, os.O_WRONLY|os.O_CREATE, 0644)
+	url := consts.PrePath + strconv.Itoa(sid) + "_" + name
+	f, err := os.OpenFile(url, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
 		log.Println("Error creating file: ", err)
 		return errors.New(fmt.Sprintln("Error creating file: ", err))
@@ -28,5 +29,12 @@ func AddImageToScene(name string, file multipart.File, sid int) (err error) {
 		log.Println("Error writing file to disk: ", err)
 		return errors.New(fmt.Sprintln("Error writing file to disk: ", err))
 	}
-	return dao.AddImageToScene(name, url, sid)
+	log.Println("url = ", url)
+	return dao.AddImageToScene(url, sid)
+}
+func GetScene(sid int) (resp *model.GetSceneResponse, err error) {
+	return dao.GetScene(sid)
+}
+func AddComments(comment *model.Comment) (err error) {
+	return dao.AddComments(comment)
 }

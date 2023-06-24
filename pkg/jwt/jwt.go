@@ -6,7 +6,6 @@ import (
 	"github.com/redis/go-redis/v9"
 	"log"
 	"qin/configs/consts"
-	"qin/web"
 	"time"
 )
 
@@ -23,9 +22,9 @@ func InitRedis() {
 	})
 }
 
-func GenToken(userInfo *web.User) (string, error) {
+func GenToken(username string) (string, error) {
 	c := MyClaims{
-		userInfo.Username,
+		username,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(TokenExpireDuration).Unix(),
 			Issuer:    "kangning",
@@ -38,9 +37,6 @@ func GenToken(userInfo *web.User) (string, error) {
 	if err != nil {
 		log.Panicln(err)
 	}
-	//从黑名单中取出token,该想法不合适，已禁止
-	//num, err1 := Client.HDel(context.Background(), "black", strconv.Itoa(int(userInfo.Id))).Result()
-	//log.Println("Client.LRem return ", num, err1)
 	return tokenStr, err
 }
 

@@ -2,15 +2,15 @@ package service
 
 import (
 	"qin/dao"
-	"qin/web"
+	"qin/model"
 )
 
-func SignIn(user *web.User) (err error) {
+func SignIn(user *model.User) (err error) {
 	return dao.SignIn(user)
 }
-func Login(user *web.User) (err error) {
+func Login(user *model.User) (err error) {
 	return dao.Login(user)
 }
-func SignOut(user *web.User) (err error) {
+func SignOut(user *model.User) (err error) {
 	return dao.SignOut(user)
 }

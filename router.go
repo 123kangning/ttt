@@ -1,21 +1,27 @@
-package web
+package main
 
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"qin/pkg/jwt"
+	"qin/web"
 )
 
 func InitRouter() *gin.Engine {
 	r := gin.Default()
 	baseGroup := r.Group("/qin")
 
-	baseGroup.POST("/user/signIn/", SignIn)
-	baseGroup.POST("/user/login/", Login)
+	baseGroup.POST("/user/signIn/", web.SignIn)
+	baseGroup.POST("/user/login/", web.Login)
 
 	userG := baseGroup.Group("/user", AuthMiddleware())
-	userG.POST("/signOut/", SignOut)
+	userG.POST("/signOut/", web.SignOut)
 
+	sceneG := baseGroup.Group("/scene", AuthMiddleware())
+	sceneG.POST("/add/", web.AddScene)
+	sceneG.POST("/addPic/", web.AddImageToScene)
+	sceneG.GET("/get/", web.GetScene)
+	sceneG.POST("/addCom/", web.AddComments)
 	return r
 }
 func AuthMiddleware() gin.HandlerFunc {

@@ -4,27 +4,20 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"qin/model"
+	"qin/pkg/jwt"
 	"qin/service"
 )
 
-type BaseResp struct {
-	StatusCode    int
-	StatusMessage string
-}
-type User struct {
-	Username string
-	Password string
-}
-
 func SignIn(c *gin.Context) {
-	req := &User{}
+	req := &model.User{}
 	if err := c.Bind(req); err != nil {
 		log.Println("err = ", err, " req = ", req)
 		c.JSON(http.StatusBadRequest, "bind error")
 		return
 	}
 	err := service.SignIn(req)
-	resp := &BaseResp{}
+	resp := &model.BaseResp{}
 	if err != nil {
 		resp.StatusCode = 1
 		resp.StatusMessage = err.Error()
@@ -32,26 +25,28 @@ func SignIn(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 func Login(c *gin.Context) {
-	req := &User{}
+	req := &model.User{}
 	if err := c.Bind(req); err != nil {
 		log.Println("err = ", err, " req = ", req)
 		c.JSON(http.StatusBadRequest, "bind error")
 		return
 	}
 	err := service.Login(req)
-	resp := &BaseResp{}
+	resp := &model.UserLoginResponse{}
 	if err != nil {
 		resp.StatusCode = 1
 		resp.StatusMessage = err.Error()
+	} else {
+		resp.Token, _ = jwt.GenToken(req.Username)
 	}
 	c.JSON(http.StatusOK, resp)
 }
 func SignOut(c *gin.Context) {
-	req := &User{}
+	req := &model.User{}
 	username, _ := c.Get("username")
 	req.Username = username.(string)
 	err := service.SignOut(req)
-	resp := &BaseResp{}
+	resp := &model.BaseResp{}
 	if err != nil {
 		resp.StatusCode = 1
 		resp.StatusMessage = err.Error()
