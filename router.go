@@ -9,16 +9,17 @@ import (
 
 func InitRouter() *gin.Engine {
 	r := gin.Default()
+	r.Use(Cors())
 	baseGroup := r.Group("/qin")
 
 	baseGroup.POST("/user/signIn/", web.SignIn)
 	baseGroup.POST("/user/login/", web.Login)
 
-	userG := baseGroup.Group("/user", AuthMiddleware())
-	userG.POST("/signOut/", web.SignOut)
-	userG.POST("/addJou/", web.AddJourney)
-	userG.GET("/getJous/", web.GetJourneys)
-	userG.GET("/getJou/", web.GetJourney)
+	userG := baseGroup.Group("/user")
+	userG.POST("/signOut/", AuthMiddleware(), web.SignOut)
+	userG.POST("/addJou/", AuthMiddleware(), web.AddJourney)
+	userG.GET("/getJous/", AuthMiddleware(), web.GetJourneys)
+	userG.GET("/getJou/", AuthMiddleware(), web.GetJourney)
 
 	sceneG := baseGroup.Group("/scene", AuthMiddleware())
 	sceneG.POST("/add/", web.AddScene)
@@ -26,6 +27,23 @@ func InitRouter() *gin.Engine {
 	sceneG.GET("/get/", web.GetScene)
 	sceneG.POST("/addCom/", web.AddComments)
 	return r
+}
+func Cors() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		method := c.Request.Method
+		origin := c.Request.Header.Get("Origin")
+		if origin != "" {
+			c.Header("Access-Control-Allow-Origin", "*") // 可将将 * 替换为指定的域名
+			c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, UPDATE")
+			c.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+			c.Header("Access-Control-Expose-Headers", "Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Cache-Control, Content-Language, Content-Type")
+			c.Header("Access-Control-Allow-Credentials", "true")
+		}
+		if method == "OPTIONS" {
+			c.AbortWithStatus(http.StatusNoContent)
+		}
+		c.Next()
+	}
 }
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {

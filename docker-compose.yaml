@@ -10,6 +10,8 @@ services:
       - MYSQL_DATABASE=qin
       - MYSQL_USER=qin
       - MYSQL_PASSWORD=qin
+    volumes:
+      - ./public/mysql:/var/lib/mysql
   redis:
     image: "redis:latest"
     ports:

@@ -5,16 +5,74 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] POST   /qin/user/signIn/         --> qin/web.SignIn (3 handlers)
-[GIN-debug] POST   /qin/user/login/          --> qin/web.Login (3 handlers)
-[GIN-debug] POST   /qin/user/signOut/        --> qin/web.SignOut (4 handlers)
-[GIN-debug] POST   /qin/user/addJou/         --> qin/web.AddJourney (4 handlers)
-[GIN-debug] GET    /qin/user/getJous/        --> qin/web.GetJourneys (4 handlers)
-[GIN-debug] GET    /qin/user/getJou/         --> qin/web.GetJourney (4 handlers)
-[GIN-debug] POST   /qin/scene/add/           --> qin/web.AddScene (4 handlers)
-[GIN-debug] POST   /qin/scene/addPic/        --> qin/web.AddImageToScene (4 handlers)
-[GIN-debug] GET    /qin/scene/get/           --> qin/web.GetScene (4 handlers)
-[GIN-debug] POST   /qin/scene/addCom/        --> qin/web.AddComments (4 handlers)
+[GIN-debug] POST   /qin/user/signIn/         --> qin/web.SignIn (4 handlers)
+[GIN-debug] POST   /qin/user/login/          --> qin/web.Login (4 handlers)
+[GIN-debug] POST   /qin/user/signOut/        --> qin/web.SignOut (5 handlers)
+[GIN-debug] POST   /qin/user/addJou/         --> qin/web.AddJourney (5 handlers)
+[GIN-debug] GET    /qin/user/getJous/        --> qin/web.GetJourneys (5 handlers)
+[GIN-debug] GET    /qin/user/getJou/         --> qin/web.GetJourney (5 handlers)
+[GIN-debug] POST   /qin/scene/add/           --> qin/web.AddScene (5 handlers)
+[GIN-debug] POST   /qin/scene/addPic/        --> qin/web.AddImageToScene (5 handlers)
+[GIN-debug] GET    /qin/scene/get/           --> qin/web.GetScene (5 handlers)
+[GIN-debug] POST   /qin/scene/addCom/        --> qin/web.AddComments (5 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on 127.0.0.1:8077
+[GIN-debug] redirecting request 301: /qin/scene/get/ --> /qin/scene/get/?Name=<Name>
+[GIN] 2023/06/25 - 20:45:08 | 401 |       39.74µs |       127.0.0.1 | GET      "/qin/scene/get/?Name=<Name>"
+[GIN-debug] redirecting request 307: /qin/user/login/ --> /qin/user/login/
+[GIN] 2023/06/25 - 20:45:37 | 400 |      99.525µs |       127.0.0.1 | POST     "/qin/user/login/"
+[GIN-debug] redirecting request 307: /qin/user/login/ --> /qin/user/login/
+
+2023/06/25 20:46:37 [31;1m/home/kangning/clone/ttt/dao/user.go:38 [35;1mError 1146 (42S02): Table 'qin.users' doesn't exist
+[0m[33m[4.334ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE username = 'z3' LIMIT 1
+[GIN] 2023/06/25 - 20:46:37 | 200 |    4.625174ms |       127.0.0.1 | POST     "/qin/user/login/"
+[GIN-debug] redirecting request 307: /qin/user/signIn/ --> /qin/user/signIn/
+
+2023/06/25 20:46:48 [31;1m/home/kangning/clone/ttt/dao/user.go:28 [35;1mError 1146 (42S02): Table 'qin.users' doesn't exist
+[0m[33m[0.629ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE username = 'z3' LIMIT 1
+
+2023/06/25 20:46:48 [31;1m/home/kangning/clone/ttt/dao/user.go:34 [35;1mError 1146 (42S02): Table 'qin.users' doesn't exist
+[0m[33m[0.503ms] [34;1m[rows:0][0m INSERT INTO `users` (`username`,`password`) VALUES ('z3','$2a$10$gouWtjQEqzrh/nyPCb1Dn.FTZLUrLmVOl7iB2tck94cf6I83skyhG')
+[GIN] 2023/06/25 - 20:46:48 | 200 |   54.086871ms |       127.0.0.1 | POST     "/qin/user/signIn/"
+[GIN-debug] redirecting request 301: /qin/user/getJous/ --> /qin/user/getJous/
+
+2023/06/25 20:48:55 [31;1m/home/kangning/clone/ttt/dao/user.go:60 [35;1mError 1146 (42S02): Table 'qin.journeys' doesn't exist
+[0m[33m[0.907ms] [34;1m[rows:0][0m SELECT * FROM `journeys` WHERE username = 'z3'
+[GIN] 2023/06/25 - 20:48:55 | 200 |     1.22287ms |       127.0.0.1 | GET      "/qin/user/getJous/"
+[GIN-debug] redirecting request 307: /qin/user/signIn/ --> /qin/user/signIn/
+
+2023/06/25 20:51:30 [32m/home/kangning/clone/ttt/dao/user.go:28
+[0m[33m[3.872ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE username = 'z3' LIMIT 1
+
+2023/06/25 20:51:30 [32m/home/kangning/clone/ttt/dao/user.go:34
+[0m[33m[3.048ms] [34;1m[rows:1][0m INSERT INTO `users` (`username`,`password`) VALUES ('z3','$2a$10$8XeM.vxoV2ToPO/4UVAX6uAgm1Cv.oiA6a44m8XaOLtTceFLTshT.')
+[GIN] 2023/06/25 - 20:51:30 | 200 |   61.056321ms |       127.0.0.1 | POST     "/qin/user/signIn/"
+[GIN-debug] redirecting request 307: /qin/user/login/ --> /qin/user/login/
+
+2023/06/25 20:51:34 [32m/home/kangning/clone/ttt/dao/user.go:38
+[0m[33m[0.441ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE username = 'z3' LIMIT 1
+[GIN] 2023/06/25 - 20:51:34 | 200 |   56.487783ms |       127.0.0.1 | POST     "/qin/user/login/"
+[GIN-debug] redirecting request 307: /qin/user/signIn/ --> /qin/user/signIn/
+
+2023/06/25 20:59:57 [32m/home/kangning/clone/ttt/dao/user.go:28
+[0m[33m[4.652ms] [34;1m[rows:0][0m SELECT * FROM `users` WHERE username = 'z3' LIMIT 1
+
+2023/06/25 20:59:57 [32m/home/kangning/clone/ttt/dao/user.go:34
+[0m[33m[2.484ms] [34;1m[rows:1][0m INSERT INTO `users` (`username`,`password`) VALUES ('z3','$2a$10$J6J2yFUEtRx8hat9U.ClHOgGX6.Yf9S74x7K3nilzEA3pt6cu01Y2')
+[GIN] 2023/06/25 - 20:59:57 | 200 |   60.684714ms |       127.0.0.1 | POST     "/qin/user/signIn/"
+[GIN-debug] redirecting request 307: /qin/user/login/ --> /qin/user/login/
+
+2023/06/25 21:00:01 [32m/home/kangning/clone/ttt/dao/user.go:38
+[0m[33m[0.395ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE username = 'z3' LIMIT 1
+[GIN] 2023/06/25 - 21:00:01 | 200 |   53.847556ms |       127.0.0.1 | POST     "/qin/user/login/"
+[GIN-debug] redirecting request 307: /qin/user/login/ --> /qin/user/login/
+
+2023/06/25 21:01:56 [32m/home/kangning/clone/ttt/dao/user.go:38
+[0m[33m[0.439ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE username = 'z3' LIMIT 1
+[GIN] 2023/06/25 - 21:01:56 | 200 |   53.420395ms |       127.0.0.1 | POST     "/qin/user/login/"
+[GIN-debug] redirecting request 307: /qin/user/login/ --> /qin/user/login/
+
+2023/06/25 21:02:18 [32m/home/kangning/clone/ttt/dao/user.go:38
+[0m[33m[0.429ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE username = 'z3' LIMIT 1
+[GIN] 2023/06/25 - 21:02:18 | 200 |   51.201221ms |       127.0.0.1 | POST     "/qin/user/login/"
