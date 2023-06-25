@@ -3,24 +3,13 @@ package jwt
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/redis/go-redis/v9"
 	"log"
-	"qin/configs/consts"
 	"time"
 )
 
 const TokenExpireDuration = JWTOverTime
 
 var MySecret = []byte(JWTSecret)
-
-var Client *redis.Client
-
-func InitRedis() {
-	Client = redis.NewClient(&redis.Options{
-		Addr: "localhost:" + consts.RedisPort,
-		DB:   0, // use default DB
-	})
-}
 
 func GenToken(username string) (string, error) {
 	c := MyClaims{
