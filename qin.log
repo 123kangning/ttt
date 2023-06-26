@@ -5,16 +5,16 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] POST   /qin/user/signIn/         --> qin/web.SignIn (4 handlers)
-[GIN-debug] POST   /qin/user/login/          --> qin/web.Login (4 handlers)
-[GIN-debug] POST   /qin/user/signOut/        --> qin/web.SignOut (5 handlers)
-[GIN-debug] POST   /qin/user/addJou/         --> qin/web.AddJourney (5 handlers)
-[GIN-debug] GET    /qin/user/getJous/        --> qin/web.GetJourneys (5 handlers)
-[GIN-debug] GET    /qin/user/getJou/         --> qin/web.GetJourney (5 handlers)
-[GIN-debug] POST   /qin/scene/add/           --> qin/web.AddScene (5 handlers)
-[GIN-debug] POST   /qin/scene/addPic/        --> qin/web.AddImageToScene (5 handlers)
-[GIN-debug] GET    /qin/scene/get/           --> qin/web.GetScene (5 handlers)
-[GIN-debug] POST   /qin/scene/addCom/        --> qin/web.AddComments (5 handlers)
+[GIN-debug] POST   /qin/user/signIn/         --> qin/web.SignIn (3 handlers)
+[GIN-debug] POST   /qin/user/login/          --> qin/web.Login (3 handlers)
+[GIN-debug] POST   /qin/user/signOut/        --> qin/web.SignOut (4 handlers)
+[GIN-debug] POST   /qin/user/addJou/         --> qin/web.AddJourney (4 handlers)
+[GIN-debug] GET    /qin/user/getJous/        --> qin/web.GetJourneys (4 handlers)
+[GIN-debug] GET    /qin/user/getJou/         --> qin/web.GetJourney (4 handlers)
+[GIN-debug] POST   /qin/scene/add/           --> qin/web.AddScene (4 handlers)
+[GIN-debug] POST   /qin/scene/addPic/        --> qin/web.AddImageToScene (4 handlers)
+[GIN-debug] GET    /qin/scene/get/           --> qin/web.GetScene (4 handlers)
+[GIN-debug] POST   /qin/scene/addCom/        --> qin/web.AddComments (4 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8077

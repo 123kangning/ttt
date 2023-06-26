@@ -9,7 +9,7 @@ import (
 
 func AddScene(sceneInfo *model.Scene) (err error) {
 	s := &model.Scene{}
-	DB.Where("name = ?", sceneInfo.Name).Limit(1).Find(s)
+	DB.Model(&model.Scene{}).Where("name = ?", sceneInfo.Name).Limit(1).Find(s)
 	if s.Id > 0 {
 		return errors.New("添加失败，景点名称重复")
 	}
@@ -30,7 +30,7 @@ func AddImageToScene(url string, sid int) (err error) {
 func GetScene(name string) (resp *model.GetSceneResponse, err error) {
 	var s []*model.Scene
 	log.Println(name, " &s.type = ", reflect.TypeOf(&s))
-	DB.Where("name like ?", "%"+name+"%").Find(&s)
+	DB.Model(&model.Scene{}).Where("name like ?", "%"+name+"%").Find(&s)
 	log.Println(s)
 	resp = &model.GetSceneResponse{}
 	resp.Scene = make([]*model.Scenes, 0)
