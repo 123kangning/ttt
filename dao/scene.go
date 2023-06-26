@@ -15,7 +15,7 @@ func AddScene(sceneInfo *model.Scene) (err error) {
 	}
 	s.Name = sceneInfo.Name
 	s.Description = sceneInfo.Description
-	return DB.Model("scenes").Create(s).Error
+	return DB.Model(&model.Scene{}).Create(s).Error
 }
 func AddImageToScene(url string, sid int) (err error) {
 	i := &model.Images{}
