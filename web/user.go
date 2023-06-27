@@ -60,6 +60,8 @@ func AddJourney(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, "bind error")
 		return
 	}
+	u, _ := c.Get("username")
+	req.Username = u.(string)
 	err := service.AddJourney(req)
 	resp := &model.BaseResp{}
 	if err != nil {
