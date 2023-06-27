@@ -15,6 +15,7 @@
 [GIN-debug] POST   /qin/scene/addPic/        --> qin/web.AddImageToScene (4 handlers)
 [GIN-debug] GET    /qin/scene/get/           --> qin/web.GetScene (4 handlers)
 [GIN-debug] POST   /qin/scene/addCom/        --> qin/web.AddComments (4 handlers)
+[GIN-debug] GET    /qin/scene/getCom/        --> qin/web.GetCommon (4 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8077

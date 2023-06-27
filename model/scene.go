@@ -11,14 +11,17 @@ type Images struct {
 }
 type Scenes struct {
 	Scene
-	Urls     []string
-	Comments []*Comment
+	Urls []string
 }
 type GetSceneResponse struct {
 	BaseResp
 	Scene []*Scenes
 }
 type Comment struct {
-	Id, Sid           int
+	Id                int
 	Username, Content string
+}
+type GetCommentResponse struct {
+	BaseResp
+	Comments []*Comment
 }

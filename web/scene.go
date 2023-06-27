@@ -75,3 +75,13 @@ func AddComments(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, resp)
 }
+func GetCommon(c *gin.Context) {
+	resp := &model.GetCommentResponse{}
+	var err error
+	resp.Comments, err = service.GetCommon()
+	if err != nil {
+		resp.StatusCode = 1
+		resp.StatusMessage = err.Error()
+	}
+	c.JSON(http.StatusOK, resp)
+}

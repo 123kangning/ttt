@@ -25,6 +25,7 @@ func InitRouter() *gin.Engine {
 	sceneG.POST("/addPic/", web.AddImageToScene)
 	sceneG.GET("/get/", web.GetScene)
 	sceneG.POST("/addCom/", web.AddComments)
+	sceneG.GET("/getCom/", web.GetCommon)
 	return r
 }
 func AuthMiddleware() gin.HandlerFunc {

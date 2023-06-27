@@ -38,3 +38,6 @@ func GetScene(name string) (resp *model.GetSceneResponse, err error) {
 func AddComments(comment *model.Comment) (err error) {
 	return dao.AddComments(comment)
 }
+func GetCommon() (resp []*model.Comment, err error) {
+	return dao.GetComment()
+}

@@ -44,11 +44,6 @@ func GetScene(name string) (resp *model.GetSceneResponse, err error) {
 			log.Println("GetImages err = ", err)
 			return resp, err
 		}
-		scenes.Comments, err = GetComment(v.Id)
-		if err != nil {
-			log.Println("GetComment err = ", err)
-			return resp, err
-		}
 		resp.Scene = append(resp.Scene, scenes)
 	}
 	return resp, nil
@@ -63,9 +58,9 @@ func GetImages(sid int) (urls []string, err error) {
 	log.Println(urls)
 	return urls, nil
 }
-func GetComment(sid int) (comments []*model.Comment, err error) {
-	DB.Where("sid = ?", sid).Find(&comments)
-	return comments, nil
+func GetComment() (comments []*model.Comment, err error) {
+	err = DB.Model(&model.Comment{}).Find(&comments).Error
+	return comments, err
 }
 func AddComments(comment *model.Comment) error {
 	return DB.Create(comment).Error
