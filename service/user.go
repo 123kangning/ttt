@@ -17,9 +17,6 @@ func SignOut(user *model.User) (err error) {
 func AddJourney(journey *model.Journey) (err error) {
 	return dao.AddJourney(journey)
 }
-func GetJourneys(username string) (journeys []string, err error) {
+func GetJourneys(username string) (journeys []*model.Journey, err error) {
 	return dao.GetJourneys(username)
-}
-func GetJourney(username, name string) (journeys *model.Journey, err error) {
-	return dao.GetJourney(username, name)
 }

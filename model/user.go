@@ -19,9 +19,5 @@ type Journey struct {
 }
 type GetJourneys struct {
 	BaseResp
-	Journeys []string
-}
-type GetJourney struct {
-	BaseResp
-	Journey *Journey
+	Journeys []*Journey
 }

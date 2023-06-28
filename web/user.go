@@ -82,16 +82,3 @@ func GetJourneys(c *gin.Context) {
 	resp.Journeys = js
 	c.JSON(http.StatusOK, resp)
 }
-func GetJourney(c *gin.Context) {
-	u, _ := c.Get("username")
-	username := u.(string)
-	name := c.Query("Name")
-	js, err := service.GetJourney(username, name)
-	resp := &model.GetJourney{}
-	if err != nil {
-		resp.StatusCode = 1
-		resp.StatusMessage = err.Error()
-	}
-	resp.Journey = js
-	c.JSON(http.StatusOK, resp)
-}

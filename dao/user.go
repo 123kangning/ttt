@@ -55,16 +55,7 @@ func AddJourney(journey *model.Journey) (err error) {
 	}
 	return DB.Create(journey).Error
 }
-func GetJourneys(username string) (journeys []string, err error) {
-	var js []*model.Journey
-	err = DB.Where("username = ?", username).Find(&js).Error
-	journeys = make([]string, 0)
-	for _, v := range js {
-		journeys = append(journeys, v.Name)
-	}
+func GetJourneys(username string) (journeys []*model.Journey, err error) {
+	err = DB.Where("username = ?", username).Find(&journeys).Error
 	return journeys, err
-}
-func GetJourney(username, name string) (journey *model.Journey, err error) {
-	err = DB.Where("username = ? and name = ?", username, name).Find(&journey).Error
-	return journey, err
 }

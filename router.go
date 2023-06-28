@@ -18,7 +18,6 @@ func InitRouter() *gin.Engine {
 	userG.POST("/signOut/", AuthMiddleware(), web.SignOut)
 	userG.POST("/addJou/", AuthMiddleware(), web.AddJourney)
 	userG.GET("/getJous/", AuthMiddleware(), web.GetJourneys)
-	userG.GET("/getJou/", AuthMiddleware(), web.GetJourney)
 
 	sceneG := baseGroup.Group("/scene", AuthMiddleware())
 	sceneG.POST("/add/", web.AddScene)

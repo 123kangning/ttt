@@ -10,7 +10,6 @@
 [GIN-debug] POST   /qin/user/signOut/        --> qin/web.SignOut (4 handlers)
 [GIN-debug] POST   /qin/user/addJou/         --> qin/web.AddJourney (4 handlers)
 [GIN-debug] GET    /qin/user/getJous/        --> qin/web.GetJourneys (4 handlers)
-[GIN-debug] GET    /qin/user/getJou/         --> qin/web.GetJourney (4 handlers)
 [GIN-debug] POST   /qin/scene/add/           --> qin/web.AddScene (4 handlers)
 [GIN-debug] POST   /qin/scene/addPic/        --> qin/web.AddImageToScene (4 handlers)
 [GIN-debug] GET    /qin/scene/get/           --> qin/web.GetScene (4 handlers)
@@ -19,3 +18,21 @@
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on 0.0.0.0:8077
+[GIN-debug] redirecting request 307: /qin/user/login/ --> /qin/user/login/
+
+2023/06/28 12:54:53 [32m/home/kangning/clone/ttt/dao/user.go:38
+[0m[33m[65.449ms] [34;1m[rows:1][0m SELECT * FROM `users` WHERE username = 'z3' LIMIT 1
+[GIN] 2023/06/28 - 12:54:54 | 200 |  119.526231ms |       127.0.0.1 | POST     "/qin/user/login/"
+[GIN-debug] redirecting request 307: /qin/user/addJou/ --> /qin/user/addJou/
+
+2023/06/28 12:55:05 [32m/home/kangning/clone/ttt/dao/user.go:52
+[0m[33m[62.437ms] [34;1m[rows:0][0m SELECT * FROM `journeys` WHERE username = 'z3' and name = '林山京' LIMIT 1
+
+2023/06/28 12:55:05 [32m/home/kangning/clone/ttt/dao/user.go:56
+[0m[33m[63.792ms] [34;1m[rows:1][0m INSERT INTO `journeys` (`username`,`name`,`content`) VALUES ('z3','林山京','non culpa tempor et sint')
+[GIN] 2023/06/28 - 12:55:05 | 200 |   126.47383ms |       127.0.0.1 | POST     "/qin/user/addJou/"
+[GIN-debug] redirecting request 301: /qin/user/getJous/ --> /qin/user/getJous/
+
+2023/06/28 12:55:23 [32m/home/kangning/clone/ttt/dao/user.go:59
+[0m[33m[60.611ms] [34;1m[rows:5][0m SELECT * FROM `journeys` WHERE username = 'z3'
+[GIN] 2023/06/28 - 12:55:23 | 200 |    60.81337ms |       127.0.0.1 | GET      "/qin/user/getJous/"
